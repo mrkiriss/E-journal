@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.e_journal.interfaces.AddingPostman;
+import com.example.e_journal.interfaces.DocumentsPostman;
 import com.example.e_journal.school.Class;
 import com.example.e_journal.school.Elective;
 import com.example.e_journal.school.Employee;
@@ -22,8 +23,10 @@ import com.example.e_journal.school.School;
 import com.example.e_journal.school.Section;
 import com.example.e_journal.school.Teacher;
 
+import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AddingPostman {
+
+public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman {
 
     // экземпляр класса School
     public School school= new School();
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman {
     }
 
     // ---авторские функции---
-
+    // функции для ДОБАВЛЕНИЕ
     // перегрузки функции, которая добавляет выбранную категорию в подходящий список у school
     @Override
     public void fragmentMail(Learner x) {
@@ -90,6 +93,24 @@ public class MainActivity extends AppCompatActivity implements AddingPostman {
     @Override
     public void fragmentMail(Section x) {
         school.addSection(x);
+    }
+    public int getCountClasses(){
+        return school.getCountClasses();
+    }
+
+    // функции для ДОКУМЕНТЫ
+    // фукнции, отвечающие за передачу свойств экземляра school во фрагмент documents
+    public ArrayList<String[]> getTeachers(){
+        return school.getListTeachers();
+    }
+    public ArrayList<String[]> getLearners(){
+        return school.getListLearners();
+    }
+    public ArrayList<String[]> getParticipants(){
+        return school.getListParticipants();
+    }
+    public ArrayList<String[]> getLearnersAndParents(int number){
+        return school.getListForClassMeeting(number);
     }
 
 }

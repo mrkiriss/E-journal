@@ -201,7 +201,7 @@ public class adding extends Fragment {
                         cardID.setVisibility(View.GONE);
                         position.setVisibility(View.GONE);
                     case "Класс":
-                        Class c = new Class(fullName.getText().toString());
+                        Class c = new Class(fullName.getText().toString(), post.getCountClasses());
                         // отправка созданного экземляра в MainActivity
                         post.fragmentMail(c);
 

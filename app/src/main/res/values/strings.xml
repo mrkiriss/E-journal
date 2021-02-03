@@ -12,8 +12,19 @@
     <string name="menu_adding">Добавление</string>
     <string name="menu_groups">Группы</string>
     <string name="menu_find">Поиск</string>
+    <!--Строки для ДОКУМЕНТЫ-->
+    <string name="label_instruction">Выберите документ, который хотите сгенерировать</string>
+    <string name="label_classes">Выберите класс</string>
+    <string-array name="spinner_documents">
+        <item>Список преподавателей с указанием квалификации</item>
+        <item>Список школьников с указанием возраста</item>
+        <item>Список всех людей, имеющих доступ в школу</item>
+        <item>Список учеников класса вместе с родителями</item>
+    </string-array>
+    <string name="button_generate">Сгенерировать документ</string>
+    <string name="button_clear">Очистить</string>
 
-<!--Строки для ДОБАВЛЕНИЯ-->
+    <!--Строки для ДОБАВЛЕНИЯ-->
     <string name="label_add">Выберите категорию объекта, который будет добавлен</string>
     <string name="button_continue">Продолжить</string>
     <string name="button_accept">Подтвердить</string>
@@ -26,5 +37,7 @@
         <item>Электив</item>
         <item>Секция</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
