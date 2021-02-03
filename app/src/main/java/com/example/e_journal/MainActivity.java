@@ -1,10 +1,7 @@
 package com.example.e_journal;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.NavigationView;
 
 import androidx.navigation.NavController;
@@ -16,8 +13,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.e_journal.interfaces.AddingPostman;
+import com.example.e_journal.school.Class;
+import com.example.e_journal.school.Elective;
+import com.example.e_journal.school.Employee;
+import com.example.e_journal.school.Learner;
+import com.example.e_journal.school.School;
+import com.example.e_journal.school.Section;
+import com.example.e_journal.school.Teacher;
 
+
+public class MainActivity extends AppCompatActivity implements AddingPostman {
+
+    // экземпляр класса School
+    public School school= new School();
+
+    // ---программне функции---
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -26,22 +37,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        /*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_journal, R.id.nav_documents, R.id.nav_adding, R.id.nav_groups, R.id.nav_find)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -62,6 +63,35 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    // ---авторские функции---
+
+    // перегрузки функции, которая добавляет выбранную категорию в подходящий список у school
+    @Override
+    public void fragmentMail(Learner x) {
+        school.addLearner(x);
+    }
+    @Override
+    public void fragmentMail(Teacher x) {
+        school.addTeacher(x);
+    }
+    @Override
+    public void fragmentMail(Employee x) {
+        school.addEmployee(x);
+    }
+    @Override
+    public void fragmentMail(Class x) {
+        school.addClass(x);
+    }
+    @Override
+    public void fragmentMail(Elective x) {
+        school.addElective(x);
+    }
+    @Override
+    public void fragmentMail(Section x) {
+        school.addSection(x);
+    }
+
 }
 
 

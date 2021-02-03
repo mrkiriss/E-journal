@@ -1,4 +1,4 @@
-package com.example.e_journal.ui.gallery;
+package com.example.e_journal.fragments.documents;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;

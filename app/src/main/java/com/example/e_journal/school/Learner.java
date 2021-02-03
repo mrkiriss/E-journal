@@ -4,11 +4,15 @@ import java.util.ArrayList;
 
 public class Learner extends Participant{
     ArrayList<Parent> parents=null;
-    int age;
+    String age;
 
-    Learner(String fullName, int phone, int cardID, ArrayList<Parent> parents, int age) {
+    public Learner(String fullName, String phone, String cardID, ArrayList<Parent> parents, String age) {
         super(fullName, phone, cardID);
         this.parents=parents;
         this.age=age;
+    }
+
+    public String getPhone(){
+        return this.phone;
     }
 }

@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_journal">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.e_journal.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_findUser" />
+        android:id="@+id/nav_journal"
+        android:name="com.example.e_journal.fragments.journal.HomeFragment"
+        android:label="@string/menu_journal"
+        tools:layout="@layout/fragment_journal" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.e_journal.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:id="@+id/nav_documents"
+        android:name="com.example.e_journal.fragments.documents.GalleryFragment"
+        android:label="@string/menu_documents"
         tools:layout="@layout/fragment_documents" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.e_journal.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_find_person" />
+        android:id="@+id/nav_groups"
+        android:name="com.example.e_journal.fragments.groups"
+        android:label="fragment_groups"
+        tools:layout="@layout/fragment_groups" />
+    <fragment
+        android:id="@+id/nav_adding"
+        android:name="com.example.e_journal.fragments.adding"
+        android:label="fragment_adding"
+        tools:layout="@layout/fragment_adding" />
+    <fragment
+        android:id="@+id/nav_find"
+        android:name="com.example.e_journal.fragments.find"
+        android:label="fragment_find"
+        tools:layout="@layout/fragment_find" />
 </navigation>

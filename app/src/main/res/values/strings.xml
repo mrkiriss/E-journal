@@ -7,7 +7,24 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_journal">Журнал</string>
+    <string name="menu_documents">Документы</string>
+    <string name="menu_adding">Добавление</string>
+    <string name="menu_groups">Группы</string>
+    <string name="menu_find">Поиск</string>
+
+<!--Строки для ДОБАВЛЕНИЯ-->
+    <string name="label_add">Выберите категорию объекта, который будет добавлен</string>
+    <string name="button_continue">Продолжить</string>
+    <string name="button_accept">Подтвердить</string>
+    <string name="button_cancel">Отмена</string>
+    <string-array name="spinner_categories">
+        <item>Ученик</item>
+        <item>Учитель</item>
+        <item>Работник</item>
+        <item>Класс</item>
+        <item>Электив</item>
+        <item>Секция</item>
+    </string-array>
+
 </resources>

@@ -3,15 +3,17 @@ package com.example.e_journal.school;
 import java.util.ArrayList;
 
 public class School {
-    ArrayList<Employee> employees;
-    ArrayList<Teacher> teachers;
-    ArrayList<Learner> learners;
-    ArrayList<Participant> participants;
-    ArrayList<Class> classes;
-    ArrayList<Elective> electives;
-    ArrayList<Section> sections;
+    ArrayList<Employee> employees=new ArrayList<Employee>();
+    ArrayList<Teacher> teachers=new ArrayList<Teacher>();
+    ArrayList<Learner> learners=new ArrayList<Learner>();
+    ArrayList<Participant> participants=new ArrayList<Participant>();
+    ArrayList<Class> classes=new ArrayList<Class>();
+    ArrayList<Elective> electives=new ArrayList<Elective>();
+    ArrayList<Section> sections=new  ArrayList<Section>();
     String adress;
     String name;
+
+    /* Для меню ДОКУМЕНТЫ */
 
     //  список вспомогательного (неучительского) состава
     void getListEmployees(){
@@ -74,5 +76,33 @@ public class School {
     void getListForSectionMeeting(int number){
         Section obj = sections.get(number-1);
         ArrayList<ArrayList<String>> list = obj.getListParrents();
+    }
+
+    /* Для меню ДОБАВЛЕНИЕ */
+
+    private void addParticipant(String fullName, String phone, String cardID){
+        Participant p = new Participant(fullName, phone, cardID);
+        participants.add(p);
+    }
+    public void addLearner(Learner x){
+        learners.add(x);
+        addParticipant(x.fullName, x.phone, x.cardID);
+    }
+    public void addTeacher(Teacher x){
+        teachers.add(x);
+        addParticipant(x.fullName, x.phone, x.cardID);
+    }
+    public void addEmployee(Employee x){
+        employees.add(x);
+        addParticipant(x.fullName, x.phone, x.cardID);
+    }
+    public void addClass(Class x){
+        classes.add(x);
+    }
+    public void addElective(Elective x){
+        electives.add(x);
+    }
+    public void addSection(Section x){
+        sections.add(x);
     }
 }

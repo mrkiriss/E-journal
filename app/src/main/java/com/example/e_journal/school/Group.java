@@ -11,6 +11,11 @@ public class Group {
         this.classTeacher=classTeacher;
         this.learners=learners;
     }
+    //пустой конструктор (использутеся в меня ДОБАВЛЕНИЕ)
+    Group(){
+        this.classTeacher=new Teacher();
+        this.learners=new ArrayList<Learner>();
+    }
 
     //получение списка учеников
     ArrayList<String> getList(){
@@ -38,9 +43,9 @@ public class Group {
         return list;
     }
 
-    // добавление ученика в группу
-    void addLearner(String fullName, int phone, int cardID, ArrayList<Parent> parents, int age){
-        Learner l= new Learner(fullName, phone, cardID, parents, age);
-        learners.add(l);
-    }
+//    // добавление ученика в группу
+//    void addLearner(String fullName, String phone, String cardID, ArrayList<Parent> parents, String age){
+//        Learner l= new Learner(fullName, phone, cardID, parents, age);
+//        learners.add(l);
+//    }
 }
