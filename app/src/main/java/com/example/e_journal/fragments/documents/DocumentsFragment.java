@@ -73,12 +73,18 @@ public class GalleryFragment extends Fragment {
                         row.addView(item0);
                         item1.setText("Квалификация");
                         row.addView(item1);
+
                         table.addView(row);
 
                         list = post.getTeachers();
 
                         for (String[] i : list) {
+
                             row = new TableRow(getContext());
+                            item0 = new TextView(getContext());
+                            item1 = new TextView(getContext());
+                            item0.setPadding(5, 0, 5, 0);
+                            item1.setPadding(5, 0, 5, 0);
                             item0.setText(i[0]);
                             row.addView(item0);
                             item1.setText(i[1]);
@@ -91,6 +97,10 @@ public class GalleryFragment extends Fragment {
                     case "Список школьников с указанием возраста":
                         // добавляем шапку таблице
                         row = new TableRow(getContext());
+                        item0 = new TextView(getContext());
+                        item1 = new TextView(getContext());
+                        item0.setPadding(5, 0, 5, 0);
+                        item1.setPadding(5, 0, 5, 0);
                         item0.setText("ФИО");
                         row.addView(item0);
                         item1.setText("Возраст");
@@ -101,6 +111,10 @@ public class GalleryFragment extends Fragment {
 
                         for (String[] i : list) {
                             row = new TableRow(getContext());
+                            item0 = new TextView(getContext());
+                            item1 = new TextView(getContext());
+                            item0.setPadding(5, 0, 5, 0);
+                            item1.setPadding(5, 0, 5, 0);
                             item0.setText(i[0]);
                             row.addView(item0);
                             item1.setText(i[1]);
@@ -113,6 +127,10 @@ public class GalleryFragment extends Fragment {
                     case "Список всех людей, имеющих доступ в школу":
                         // добавляем шапку таблице
                         row = new TableRow(getContext());
+                        item0 = new TextView(getContext());
+                        item1 = new TextView(getContext());
+                        item0.setPadding(5, 0, 5, 0);
+                        item1.setPadding(5, 0, 5, 0);
                         item0.setText("ID");
                         row.addView(item0);
                         item1.setText("ФИО");
@@ -123,6 +141,10 @@ public class GalleryFragment extends Fragment {
 
                         for (String[] i : list) {
                             row = new TableRow(getContext());
+                            item0 = new TextView(getContext());
+                            item1 = new TextView(getContext());
+                            item0.setPadding(5, 0, 5, 0);
+                            item1.setPadding(5, 0, 5, 0);
                             item0.setText(i[0]);
                             row.addView(item0);
                             item1.setText(i[1]);

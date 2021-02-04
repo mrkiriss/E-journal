@@ -14,7 +14,7 @@
     <string name="menu_find">Поиск</string>
     <!--Строки для ДОКУМЕНТЫ-->
     <string name="label_instruction">Выберите документ, который хотите сгенерировать</string>
-    <string name="label_classes">Выберите класс</string>
+    <string name="label_classes">Выберите номер класса</string>
     <string-array name="spinner_documents">
         <item>Список преподавателей с указанием квалификации</item>
         <item>Список школьников с указанием возраста</item>
@@ -23,7 +23,22 @@
     </string-array>
     <string name="button_generate">Сгенерировать документ</string>
     <string name="button_clear">Очистить</string>
-
+    <!--Строки для ГРУППЫ-->
+    <string name="label_group_type">Выберите тип группы</string>
+    <string-array name="spinner_group_type">
+        <item>Класс</item>
+        <item>Электив</item>
+        <item>Секция</item>
+    </string-array>
+    <string name="label_group_name">Выберите группу</string>
+    <string name="button_redactor">Режим редактирования</string>
+    <!--Строки для ГРУППЫ (CroupEditorActivity)-->
+    <string name="label_add_learner">Выберите ученика, который будет добавлен в группу</string>
+    <string name="label_delete_learner">Выберите ученика, который будет удалён из группы</string>
+    <string name="label_teacher">Выберите учителя группы</string>
+    <string name="button_accept_adding">Подтвердить добавление</string>
+    <string name="button_accept_deleting">Подтвердить удаление</string>
+    <string name="button_exit">Выйти из режима удаления</string>
     <!--Строки для ДОБАВЛЕНИЯ-->
     <string name="label_add">Выберите категорию объекта, который будет добавлен</string>
     <string name="button_continue">Продолжить</string>

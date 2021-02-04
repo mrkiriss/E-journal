@@ -12,4 +12,8 @@ public class Elective extends Group{
     public Elective(String academicSubject){
         this.academicSubject=academicSubject;
     }
+
+    public String getAcademicSubject(){
+        return this.academicSubject;
+    }
 }

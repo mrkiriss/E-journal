@@ -13,4 +13,7 @@ public class Section extends Group{
         super();
         this.name=name;
     }
+    public String getName(){
+        return this.name;
+    }
 }

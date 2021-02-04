@@ -15,4 +15,6 @@ public interface AddingPostman {
     public void fragmentMail(Elective x);
     public void fragmentMail(Section x);
     public int getCountClasses();
+    public int getCountElectives();
+    public int getCountSections();
 }

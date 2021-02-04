@@ -15,10 +15,12 @@ import android.support.v7.widget.Toolbar;
 
 import com.example.e_journal.interfaces.AddingPostman;
 import com.example.e_journal.interfaces.DocumentsPostman;
+import com.example.e_journal.interfaces.GroupsPostman;
 import com.example.e_journal.school.Class;
 import com.example.e_journal.school.Elective;
 import com.example.e_journal.school.Employee;
 import com.example.e_journal.school.Learner;
+import com.example.e_journal.school.Parent;
 import com.example.e_journal.school.School;
 import com.example.e_journal.school.Section;
 import com.example.e_journal.school.Teacher;
@@ -26,16 +28,45 @@ import com.example.e_journal.school.Teacher;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman {
+public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman {
 
     // экземпляр класса School
     public School school= new School();
 
+    void addData(){
+        Parent l1_p1 = new Parent("Воскребенцева.О.С", "+79127090525");
+        Parent l1_p2 = new Parent("Воскребенцева.А.В", "+79127139099");
+        ArrayList<Parent> prnts = new ArrayList<Parent>();
+        prnts.add(l1_p1);prnts.add(l1_p2);
+        Learner l1 = new Learner("Воскребенцев.К.А", "+7912718314", "175", prnts, "18");
+
+        Parent l2_p1 = new Parent("Онегина.О.С", "+12349");
+        Parent l2_p2 = new Parent("Сергеич.А.В", "+5644685888888");
+        ArrayList<Parent> prnts2 = new ArrayList<Parent>();
+        prnts2.add(l1_p1);prnts2.add(l1_p2);
+        Learner l2 = new Learner("Лесков.К.А", "+7777777777777", "666", prnts2, "17");
+
+        ArrayList<Learner> lrnrs= new ArrayList<Learner>();
+        lrnrs.add(l1);lrnrs.add(l2);
+
+        Teacher t1 = new Teacher("КарлишунаЛА", "+7900000000000", "000", "учитель-бог", "нормалёк");
+        Teacher t2 = new Teacher("ПлетенёваКК", "+123456789", "999", "учитель-математик", "ну так");
+
+        Class сlass1 = new Class("1", t1, lrnrs);
+
+        school.addLearner(l1);school.addLearner(l2);
+        school.addTeacher(t1);school.addTeacher(t2);
+        school.addClass(сlass1);
+    }
     // ---программне функции---
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // начальные данный для проверки коректности программы
+        addData();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,8 +125,15 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     public void fragmentMail(Section x) {
         school.addSection(x);
     }
+
     public int getCountClasses(){
         return school.getCountClasses();
+    }
+    public int getCountElectives(){
+        return school.getCountElectives();
+    }
+    public int getCountSections(){
+        return school.getCountSections();
     }
 
     // функции для ДОКУМЕНТЫ
@@ -111,6 +149,18 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     }
     public ArrayList<String[]> getLearnersAndParents(int number){
         return school.getListForClassMeeting(number);
+    }
+
+    // функции для ГРУППЫ
+    // возвращает все существующие классы в school
+    public ArrayList<Class> getClasses(){
+        return school.getClasses();
+    }
+    public ArrayList<Elective> getElectives(){
+        return school.getElectives();
+    }
+    public ArrayList<Section> getSections(){
+        return school.getSections();
     }
 
 }

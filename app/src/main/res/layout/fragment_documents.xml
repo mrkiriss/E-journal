@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragments.documents.GalleryFragment" >
+    tools:context=".fragments.documents.DocumentsFragment" >
 
     <TextView
         android:id="@+id/textView2"
@@ -20,7 +20,7 @@
         android:entries="@array/spinner_documents" />
 
     <LinearLayout
-        android:id="@+id/choose_class"
+        android:id="@+id/container_choose_class"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

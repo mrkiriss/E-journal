@@ -62,6 +62,17 @@ public class School {
         return list;
     }
 
+    /* Для меню ГРУППЫ */
+    public ArrayList<Class> getClasses(){
+        return this.classes;
+    }
+    public ArrayList<Elective> getElectives(){
+        return this.electives;
+    }
+    public ArrayList<Section> getSections(){
+        return this.sections;
+    }
+
     /* Для меню ДОБАВЛЕНИЕ */
     private void addParticipant(String fullName, String phone, String cardID){
         Participant p = new Participant(fullName, phone, cardID);
@@ -88,7 +99,14 @@ public class School {
     public void addSection(Section x){
         sections.add(x);
     }
+
     public int getCountClasses(){
         return this.classes.size();
+    }
+    public int getCountElectives(){
+        return this.electives.size();
+    }
+    public int getCountSections(){
+        return this.sections.size();
     }
 }

@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/nav_documents"
-        android:name="com.example.e_journal.fragments.documents.GalleryFragment"
+        android:name="com.example.e_journal.fragments.documents.DocumentsFragment"
         android:label="@string/menu_documents"
         tools:layout="@layout/fragment_documents" />
 

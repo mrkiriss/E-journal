@@ -14,4 +14,7 @@ public class Teacher extends Participant{
         this.position="";
         this.qualification="";
     }
+    public String getName(){
+        return this.fullName;
+    }
 }

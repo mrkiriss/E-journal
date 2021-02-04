@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.e_journal.interfaces.AddingPostman;
 import com.example.e_journal.R;
@@ -163,15 +164,20 @@ public class adding extends Fragment {
 
                 switch(id){
                     case "Ученик":
-                        //System.out.println("Гусь");
-                        Parent p1= new Parent(parent_fio1.getText().toString(), parent_phone1.getText().toString());
-                        Parent p2= new Parent(parent_fio2.getText().toString(), parent_phone2.getText().toString());
-                        ArrayList<Parent> p=new ArrayList<Parent>();
-                        p.add(p1);p.add(p2);
-                        Learner l = new Learner(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), p, age.getText().toString());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(l);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") || phone.getText().toString().equals("") ||cardID.getText().toString().equals("") ||age.getText().toString().equals("") ||
+                                parent_fio1.getText().toString().equals("") ||parent_phone1.getText().toString().equals("") ||parent_fio2.getText().toString().equals("") ||parent_phone2.getText().toString().equals("")){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Ученик не был добавлен", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Parent p1 = new Parent(parent_fio1.getText().toString(), parent_phone1.getText().toString());
+                            Parent p2 = new Parent(parent_fio2.getText().toString(), parent_phone2.getText().toString());
+                            ArrayList<Parent> p = new ArrayList<Parent>();
+                            p.add(p1);
+                            p.add(p2);
+                            Learner l = new Learner(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), p, age.getText().toString());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(l);
+                        }
                         fullName.setVisibility(View.GONE);
                         phone.setVisibility(View.GONE);
                         cardID.setVisibility(View.GONE);
@@ -181,10 +187,15 @@ public class adding extends Fragment {
 
                         break;
                     case "Учитель":
-                        Teacher t = new Teacher(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), position.getText().toString(), qualification.getText().toString());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(t);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") || phone.getText().toString().equals("") ||cardID.getText().toString().equals("")  ||
+                                position.getText().toString().equals("") ||qualification.getText().toString().equals("")){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Учитель не был добавлен", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Teacher t = new Teacher(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), position.getText().toString(), qualification.getText().toString());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(t);
+                        }
                         fullName.setVisibility(View.GONE);
                         phone.setVisibility(View.GONE);
                         cardID.setVisibility(View.GONE);
@@ -192,33 +203,53 @@ public class adding extends Fragment {
                         qualification.setVisibility(View.GONE);
                         break;
                     case "Работник":
-                        Employee e = new Employee(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), position.getText().toString());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(e);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") || phone.getText().toString().equals("") ||cardID.getText().toString().equals("")  ||
+                                position.getText().toString().equals("")){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Работник не был добавлен", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Employee e = new Employee(fullName.getText().toString(), phone.getText().toString(), cardID.getText().toString(), position.getText().toString());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(e);
+                        }
                         fullName.setVisibility(View.GONE);
                         phone.setVisibility(View.GONE);
                         cardID.setVisibility(View.GONE);
                         position.setVisibility(View.GONE);
                     case "Класс":
-                        Class c = new Class(fullName.getText().toString(), post.getCountClasses());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(c);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") ){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Класс не был добавлен", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Class c = new Class(fullName.getText().toString());
+                            c.setIndex(post.getCountClasses());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(c);
+                        }
                         fullName.setVisibility(View.GONE);
                         break;
                     case "Электив":
-                        Elective el = new Elective(fullName.getText().toString());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(el);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") ){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Электив не был добавлен", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Elective el = new Elective(fullName.getText().toString());
+                            el.setIndex(post.getCountElectives());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(el);
+                        }
                         fullName.setVisibility(View.GONE);
                         break;
                     case "Секция":
-                        Section s = new Section(fullName.getText().toString());
-                        // отправка созданного экземляра в MainActivity
-                        post.fragmentMail(s);
-
+                        // проверка на заполнение всех полей
+                        if (fullName.getText().toString().equals("") ){
+                            Toast.makeText(getContext(), "Не все поля заполнены. Секция не былы добавлена", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Section s = new Section(fullName.getText().toString());
+                            s.setIndex(post.getCountSections());
+                            // отправка созданного экземляра в MainActivity
+                            post.fragmentMail(s);
+                        }
                         fullName.setVisibility(View.GONE);
                         break;
                 }
