@@ -8,5 +8,8 @@ public class Person {
         this.fullName=fullName;
         this.phone=phone;
     }
+    public String getFullName(){
+        return this.fullName;
+    }
 
 }

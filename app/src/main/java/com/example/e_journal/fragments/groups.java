@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.e_journal.R;
 import com.example.e_journal.interfaces.AddingPostman;
@@ -46,14 +47,14 @@ public class groups extends Fragment {
     }
 
     // авторские переменные
-    String selected_category;
+    String selected_category = "";
     ArrayList<Class> classes0 = new ArrayList<Class>();
     ArrayList<Elective> electives0 = new ArrayList<Elective>();
     ArrayList<Section> sections0 = new ArrayList<Section>();
-    Class class0;
-    Elective elective0;
-    Section section0;
-    int selected_index;
+    Class class0 = null;
+    Elective elective0 = null;
+    Section section0 =null;
+    int selected_index =0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -181,9 +182,18 @@ public class groups extends Fragment {
                 Spinner type = v.findViewById(R.id.spinner_group_category);
                 Spinner groups = v.findViewById(R.id.spinner_group);
                 LinearLayout container_group = v.findViewById(R.id.container_choose_group);
+                TableLayout table = v.findViewById(R.id.table_content);
+                Button button_continue2 = v.findViewById(R.id.button_continue2);
 
+                // даёт доступ к первой группе
                 type.setEnabled(true);
                 container_group.setVisibility(View.GONE);
+                // даёт доступ ко второй группе
+                groups.setEnabled(true);
+                button_continue2.setEnabled(true);
+
+                // удаляет все элементы в таблице вывода
+                table.removeAllViews();
                 // даём доступ к кнопке ПРОДОЛЖИТЬ1
                 v.findViewById(R.id.button_continue1).setEnabled(true);
             }
@@ -196,6 +206,12 @@ public class groups extends Fragment {
                 Spinner groups = v.findViewById(R.id.spinner_group);
                 TableLayout table = v.findViewById(R.id.table_content);
                 ArrayList<String[]> list_for_tabel = new ArrayList<String[]>(); // лист для добавления в таблицу
+
+                // выход, если нет никаких групп выбранной категории
+                if (groups.getCount() == 0){
+                    Toast.makeText(getContext(), "Ошбика. Группа не выбрана", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 // получение
                 String selected_name = groups.getSelectedItem().toString();
@@ -278,6 +294,20 @@ public class groups extends Fragment {
                 v.findViewById(R.id.button_continue2).setEnabled(true);
                 groups.setEnabled(true);
 
+            }
+        });
+
+        v.findViewById(R.id.button_redactor_mod).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Spinner groups = v.findViewById(R.id.spinner_group);
+                TableLayout table = v.findViewById(R.id.table_content);
+                // выход, если нет никаких групп выбранной категории
+                if (groups.getCount() == 0 || table.getChildCount()==0){
+                    Toast.makeText(getContext(), "Ошбика. Группа не выбрана", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                post.startEditActivity(selected_category, selected_index);
             }
         });
 

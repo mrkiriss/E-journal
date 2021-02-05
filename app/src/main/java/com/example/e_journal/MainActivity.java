@@ -1,5 +1,6 @@
 package com.example.e_journal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.support.design.widget.NavigationView;
@@ -64,8 +65,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // начальные данный для проверки коректности программы
-        addData();
+        addData(); // начальные данный для проверки коректности программы
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -161,6 +161,139 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     }
     public ArrayList<Section> getSections(){
         return school.getSections();
+    }
+
+    // функции для Активности Редактирования
+    // индикаторы общие
+    String selected_category0="";
+    int selected_index0=0;
+    // запускает активность редактирования
+    public void startEditActivity(String selected_category, int selected_index){
+        //изменяет постоянные значения индикаторов
+        selected_category0=selected_category;
+        selected_index0=selected_index;
+
+        Intent intent = new Intent(this, GroupEditorActivity.class);
+        // создание списка имён всех школьников
+        ArrayList<Learner> lrnrs = new ArrayList<Learner>();
+        switch(selected_category){
+            case "Класс":
+                 lrnrs = school.getClasses().get(selected_index).getLearners();
+                 break;
+            case "Электив":
+                lrnrs = school.getElectives().get(selected_index).getLearners();
+                 break;
+            case "Секция":
+                lrnrs = school.getSections().get(selected_index).getLearners();
+                break;
+        }
+        // получаем имена всех присутствующих в группе учеников
+        String[] current_learners = new String[lrnrs.size()];
+        for (int i=0; i<lrnrs.size();i++){
+            current_learners[i] = lrnrs.get(i).getFullName();
+        }
+        // получение списка всех остальных учеников
+        String[] other_learners = new String[school.getLearners().size()-current_learners.length];
+        int k=0;
+        for (Learner i: school.getLearners()){
+            String fullName = i.getFullName();
+            boolean bol = true;
+            for (String j: current_learners){
+                if (fullName == j){
+                    bol = false;
+                    break;
+                }
+            }
+            if (bol){
+                other_learners[k++]=fullName;
+            }
+        }
+        // получаем нынещнего учителя
+        String current_teacher = "";
+        switch(selected_category){
+            case "Класс":
+                current_teacher = school.getClasses().get(selected_index).getTeacher().getFullName();
+                break;
+            case "Электив":
+                current_teacher = school.getElectives().get(selected_index).getTeacher().getFullName();
+                break;
+            case "Секция":
+                current_teacher = school.getSections().get(selected_index).getTeacher().getFullName();
+                break;
+        }
+        // получаем список всех учителей
+        String[] teachers = new String[school.getTeachers().size()];
+        k=0;
+        for (Teacher i: school.getTeachers()){
+            teachers[k++]=i.getFullName();
+        }
+        // заполняем данные и посылаем в активити
+        intent.putExtra("current_learners", current_learners);
+        intent.putExtra("other_learners", other_learners);
+        intent.putExtra("current_teacher", current_teacher);
+        intent.putExtra("teachers", teachers);
+        startActivityForResult(intent, 0);
+    }
+    // принимает значения из Активности Редактирования, заного вызывает её
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        // взятие значение из возвращенного Intent data
+        String selected_learner=data.getStringExtra("selected_learner");
+        String selected_teacher=data.getStringExtra("selected_teacher");
+
+        switch (resultCode){
+            case 1: // запрос на добавление
+                System.out.println("Добавление запущено");
+                Learner learner = school.getLearnerByName(selected_learner); // получаем объект ученика
+                // добавляем в нужную категорию по индексу
+                switch(selected_category0){
+                    case "Класс":
+                        school.getClasses().get(selected_index0).addLearner(learner);
+                        break;
+                    case "Электив":
+                        school.getElectives().get(selected_index0).addLearner(learner);
+                        break;
+                    case "Секция":
+                        school.getSections().get(selected_index0).addLearner(learner);
+                        break;
+                }
+                break;
+            case -1: // запрос на удаление
+                System.out.println("Удаление запущено");
+                // удаляем из нужной категории по индексу
+                switch(selected_category0){
+                    case "Класс":
+                        school.getClasses().get(selected_index0).deleteLearnerByName(selected_learner);
+                        break;
+                    case "Электив":
+                        school.getElectives().get(selected_index0).deleteLearnerByName(selected_learner);
+                        break;
+                    case "Секция":
+                        school.getSections().get(selected_index0).deleteLearnerByName(selected_learner);
+                        break;
+                }
+                break;
+        }
+        // перезапись учителя
+        Teacher teacher = school.getTeacherByName(selected_teacher);
+         // изменяем нужную категорию по индексу
+        switch(selected_category0){
+            case "Класс":
+                school.getClasses().get(selected_index0).setTeacher(teacher);
+                break;
+            case "Электив":
+                school.getElectives().get(selected_index0).setTeacher(teacher);
+                break;
+            case "Секция":
+                school.getSections().get(selected_index0).setTeacher(teacher);
+                break;
+        }
+
+        if (resultCode==0){
+            return; // прекращение циклицеского вызова
+        }else {
+            startEditActivity(selected_category0, selected_index0); // повторный вызов Активити Редактирования
+        }
     }
 
 }

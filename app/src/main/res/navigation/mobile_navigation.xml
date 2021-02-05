@@ -20,16 +20,16 @@
     <fragment
         android:id="@+id/nav_groups"
         android:name="com.example.e_journal.fragments.groups"
-        android:label="fragment_groups"
+        android:label="@string/menu_groups"
         tools:layout="@layout/fragment_groups" />
     <fragment
         android:id="@+id/nav_adding"
         android:name="com.example.e_journal.fragments.adding"
-        android:label="fragment_adding"
+        android:label="@string/menu_adding"
         tools:layout="@layout/fragment_adding" />
     <fragment
         android:id="@+id/nav_find"
         android:name="com.example.e_journal.fragments.find"
-        android:label="fragment_find"
+        android:label="@string/menu_find"
         tools:layout="@layout/fragment_find" />
 </navigation>

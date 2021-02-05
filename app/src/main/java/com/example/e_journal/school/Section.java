@@ -1,8 +1,9 @@
 package com.example.e_journal.school;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Section extends Group{
+public class Section extends Group implements Serializable {
     String name;
 
     Section(String name,Teacher classTeacher, ArrayList<Learner> learners) {

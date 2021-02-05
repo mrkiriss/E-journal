@@ -38,7 +38,7 @@
     <string name="label_teacher">Выберите учителя группы</string>
     <string name="button_accept_adding">Подтвердить добавление</string>
     <string name="button_accept_deleting">Подтвердить удаление</string>
-    <string name="button_exit">Выйти из режима удаления</string>
+    <string name="button_exit">Выйти из режима редактирования</string>
     <!--Строки для ДОБАВЛЕНИЯ-->
     <string name="label_add">Выберите категорию объекта, который будет добавлен</string>
     <string name="button_continue">Продолжить</string>

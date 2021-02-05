@@ -10,4 +10,5 @@ public interface GroupsPostman {
     public ArrayList<Class> getClasses();
     public ArrayList<Elective> getElectives();
     public ArrayList<Section> getSections();
+    public void startEditActivity(String selected_category, int selected_index);
 }

@@ -1,8 +1,9 @@
 package com.example.e_journal.school;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Class extends Group{
+public class Class extends Group implements Serializable {
     String number;
 
     public Class(String number, Teacher classTeacher, ArrayList<Learner> learners){
@@ -16,12 +17,6 @@ public class Class extends Group{
 
     public String getNumber(){
         return this.number;
-    }
-    public int getIndex(){
-        return this.index;
-    }
-    public Teacher getTeacher(){
-        return this.classTeacher;
     }
 
     // создаёт динам. массив из массивов строк [ФИО ученика, ФИО родителя1, ФИО родителя2]

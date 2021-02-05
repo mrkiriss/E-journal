@@ -69,6 +69,32 @@ public class Group {
         return  list;
     }
 
+    public ArrayList<Learner> getLearners(){
+        return this.learners;
+    }
+    public Teacher getTeacher(){
+        return this.classTeacher;
+    }
+
+    public void addLearner(Learner l){
+        this.learners.add(l);
+    }
+    public void setTeacher(Teacher t){
+        this.classTeacher=t;
+    }
+    public void deleteLearnerByName(String fullName){
+        System.out.println("Удаляемое имя"+fullName);
+        ArrayList<Learner> learners_new = new ArrayList<Learner>();
+        for (Learner i: this.learners){
+            if (!fullName.equals(i.getFullName())){
+                learners_new.add(i); // добавляем в новый массимв всех учеников, кроме того, которого нужно убрать
+            }
+            System.out.println(i.getFullName());
+        }
+        this.learners=learners_new;
+        System.out.println("Количество учеников в новом массиве после удалеиня"+learners_new.size());
+    }
+
 
 
 

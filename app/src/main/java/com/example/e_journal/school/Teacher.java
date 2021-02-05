@@ -4,8 +4,8 @@ public class Teacher extends Participant{
     String position;
     String qualification;
 
-    public Teacher(String fullName, String phone,String cardId, String position, String qualification) {
-        super(fullName, phone, cardId);
+    public Teacher(String fullName, String phone,String cardID, String position, String qualification) {
+        super(fullName, phone, cardID);
         this.position=position;
         this.qualification=qualification;
     }
@@ -17,4 +17,5 @@ public class Teacher extends Participant{
     public String getName(){
         return this.fullName;
     }
+
 }

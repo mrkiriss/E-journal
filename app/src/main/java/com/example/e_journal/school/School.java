@@ -73,6 +73,26 @@ public class School {
         return this.sections;
     }
 
+    public  ArrayList<Learner> getLearners(){ return this.learners;}
+    public  ArrayList<Teacher> getTeachers(){return this.teachers;}
+
+    public Learner getLearnerByName(String fullName){
+        for (Learner i:learners){
+            if (fullName.equals(i.getFullName())){
+                return i;
+            }
+        }
+        return learners.get(0);
+    }
+    public Teacher getTeacherByName(String fullName){
+        for (Teacher i:teachers){
+            if (fullName.equals(i.getFullName())){
+                return i;
+            }
+        }
+        return teachers.get(0);
+    }
+
     /* Для меню ДОБАВЛЕНИЕ */
     private void addParticipant(String fullName, String phone, String cardID){
         Participant p = new Participant(fullName, phone, cardID);
