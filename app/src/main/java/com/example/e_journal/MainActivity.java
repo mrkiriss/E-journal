@@ -1,6 +1,8 @@
 package com.example.e_journal;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.support.design.widget.NavigationView;
@@ -13,6 +15,8 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.e_journal.interfaces.AddingPostman;
 import com.example.e_journal.interfaces.DocumentsPostman;
@@ -22,6 +26,7 @@ import com.example.e_journal.school.Elective;
 import com.example.e_journal.school.Employee;
 import com.example.e_journal.school.Learner;
 import com.example.e_journal.school.Parent;
+import com.example.e_journal.school.Participant;
 import com.example.e_journal.school.School;
 import com.example.e_journal.school.Section;
 import com.example.e_journal.school.Teacher;
@@ -32,8 +37,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman {
 
     // экземпляр класса School
-    public School school= new School();
-
+    School school= new School();
+    // экземляр класса DBHelper
+    DBHelper dbHelper = new DBHelper(this);
+/*
     void addData(){
         Parent l1_p1 = new Parent("Воскребенцева.О.С", "+79127090525");
         Parent l1_p2 = new Parent("Воскребенцева.А.В", "+79127139099");
@@ -44,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         Parent l2_p1 = new Parent("Онегина.О.С", "+12349");
         Parent l2_p2 = new Parent("Сергеич.А.В", "+5644685888888");
         ArrayList<Parent> prnts2 = new ArrayList<Parent>();
-        prnts2.add(l1_p1);prnts2.add(l1_p2);
+        prnts2.add(l2_p1);prnts2.add(l2_p2);
         Learner l2 = new Learner("Лесков.К.А", "+7777777777777", "666", prnts2, "17");
 
         ArrayList<Learner> lrnrs= new ArrayList<Learner>();
@@ -59,13 +66,14 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         school.addTeacher(t1);school.addTeacher(t2);
         school.addClass(сlass1);
     }
+*/
     // ---программне функции---
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        addData(); // начальные данный для проверки коректности программы
+        //addData(); // начальные данный для проверки коректности программы
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -82,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -92,13 +101,213 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()){
+            case R.id.action_upload:
+                Toast.makeText(getApplicationContext(), "Start upload", Toast.LENGTH_SHORT).show();
+                uploadDatabase();
+                Toast.makeText(getApplicationContext(), "Upload completed successful", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_download:
+                Toast.makeText(getApplicationContext(), "Start download", Toast.LENGTH_SHORT).show();
+                downloadDatabase();
+                Toast.makeText(getApplicationContext(), "Download completed successful", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return false;
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
-    // ---авторские функции---
+
+
+    // ----------авторские функции----------
+
+    // функции ДЛЯ работы с БАЗОЙ sql
+    void uploadDatabase(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // внесение в базу learners
+        db.execSQL("DROP TABLE IF EXISTS " + "learners");
+        db.execSQL("CREATE TABLE learners (" +"fullName STRING, phone STRING, cardID STRING, age STRING,"+
+                "fullName_parent1 STRING, phone_parent1 STRING, fullName_parent2 STRING, phone_parent2 STRING, "+
+                "consist_class STRING, consist_elective STRING, consist_section STRING)");
+        for (Learner i: school.getLearners()){
+            String data = "'"+i.getFullName()+"', '"+i.getPhone()+"', '"+i.getCardID()+"', '"+i.getAge()+"', '"+
+                    i.getParentData(0)[0]+"', '"+i.getParentData(0)[1]+"', '"+i.getParentData(1)[0]+"', '"+i.getParentData(1)[1]+"', '"+
+                    i.convertArrayToString("Класс")+"', '"+i.convertArrayToString("Электив")+"', '"+i.convertArrayToString("Секция")+"'";
+            db.execSQL(" INSERT INTO learners" + "(fullName, phone, cardID, age, fullName_parent1, phone_parent1, fullName_parent2, phone_parent2, consist_class, consist_elective, consist_section)"+
+                    " VALUES(" + data +")");
+        }
+        // внесение в базу teachers
+        db.execSQL("DROP TABLE IF EXISTS " + "teachers");
+        db.execSQL("CREATE TABLE teachers (fullName STRING, phone STRING, cardID STRING, position STRING, qvalification STRING)");
+        for (Teacher i: school.getTeachers()){
+            String data = "'"+i.getFullName()+"', '"+i.getPhone() +"', '"+ i.getCardID() + "', '" + i.getPosition() + "', '" + i.getQualification() +"'";
+            db.execSQL(" INSERT INTO teachers " + "(fullName, phone, cardID, position, qvalification)" +
+                    "VALUES (" + data + ")");
+        }
+        // внесение в базу employees
+        db.execSQL("DROP TABLE IF EXISTS " + "employees");
+        db.execSQL("CREATE TABLE employees (fullName STRING, phone STRING, cardID STRING, position STRING)");
+        for (Employee i: school.getEmployees()){
+            String data = "'"+i.getFullName()+"', '"+i.getPhone() +"', '"+ i.getCardID() + "', '" + i.getPosition()+"'";
+            db.execSQL(" INSERT INTO employees " + "(fullName, phone, cardID, position)" +
+                    "VALUES (" + data + ")");
+        }
+        // внесение в базу participants
+        db.execSQL("DROP TABLE IF EXISTS " + "participants");
+        db.execSQL("CREATE TABLE participants (fullName STRING, phone STRING, cardID STRING)");
+        for (Participant i: school.getParticipants()){
+            String data = "'"+i.getFullName()+"', '"+i.getPhone() +"', '"+ i.getCardID()+"'";
+            db.execSQL(" INSERT INTO participants " + "(fullName, phone, cardID)" +
+                    "VALUES (" + data + ")");
+        }
+        // внесение в базу classes
+        db.execSQL("DROP TABLE IF EXISTS " + "classes");
+        db.execSQL("CREATE TABLE classes (fullName STRING, teacher STRING)");
+        for (Class i: school.getClasses()){
+            String data = "'"+i.getNumber()+"', '"+i.getTeacher().getFullName()+"'";
+            db.execSQL(" INSERT INTO classes " + "(fullName, teacher)" +
+                    "VALUES (" + data + ")");
+        }
+        // внесение в базу electives
+        db.execSQL("DROP TABLE IF EXISTS " + "electives");
+        db.execSQL("CREATE TABLE electives (fullName STRING, teacher STRING)");
+        for (Elective i: school.getElectives()){
+            String data = "'"+i.getAcademicSubject()+"', '"+i.getTeacher().getFullName()+"'";
+            db.execSQL(" INSERT INTO electives " + "(fullName, teacher)" +
+                    "VALUES (" + data + ")");
+        }
+        // внесение в базу sections
+        db.execSQL("DROP TABLE IF EXISTS " + "sections");
+        db.execSQL("CREATE TABLE sections (fullName STRING, teacher STRING)");
+        for (Section i: school.getSections()){
+            String data = "'"+i.getName()+"', '"+i.getTeacher().getFullName()+"'";
+            db.execSQL(" INSERT INTO sections " + "(fullName, teacher)" +
+                    "VALUES (" + data + ")");
+        }
+        // закрытие базы данных
+        db.close();
+    }
+    void downloadDatabase(){
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // считывание из базы teachers
+        ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+        Cursor cursor = db.rawQuery("select * from teachers", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Teacher t = new Teacher(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4));
+            teachers.add(t);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setTeachers(teachers);
+        // считывание из базы classes
+        ArrayList<Class> classes = new ArrayList<Class>();
+        cursor = db.rawQuery("select * from classes", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Class c = new Class(cursor.getString(0), school.getTeacherByName(cursor.getString(1)), new ArrayList<Learner>());
+            classes.add(c);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setClasses(classes);
+        // считывание из базы electives
+        ArrayList<Elective> electives = new ArrayList<Elective>();
+        cursor = db.rawQuery("select * from electives", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Elective e = new Elective(cursor.getString(0), school.getTeacherByName(cursor.getString(1)), new ArrayList<Learner>());
+            electives.add(e);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setElectives(electives);
+        // считывание из базы sections
+        ArrayList<Section> sections = new ArrayList<Section>();
+        cursor = db.rawQuery("select * from sections", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Section s = new Section(cursor.getString(0), school.getTeacherByName(cursor.getString(1)), new ArrayList<Learner>());
+            sections.add(s);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setSections(sections);
+        // считывание из базы learners
+        ArrayList<Learner> learners = new ArrayList<Learner>();
+        cursor = db.rawQuery("select * from learners", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Parent p1 = new Parent(cursor.getString(4), cursor.getString(5));
+            Parent p2 = new Parent(cursor.getString(6), cursor.getString(7));
+            ArrayList<Parent> p = new ArrayList<Parent>();
+            p.add(p1);p.add(p2);
+            ArrayList<String> consist_class = Learner.convertStringToArray("Класс", cursor.getString(8));
+            ArrayList<String> consist_elective = Learner.convertStringToArray("Электив", cursor.getString(9));
+            ArrayList<String> consist_section = Learner.convertStringToArray("Секция", cursor.getString(10));
+            Learner l = new Learner(cursor.getString(0), cursor.getString(1), cursor.getString(2), p, cursor.getString(3), consist_class, consist_elective, consist_section);
+            learners.add(l);
+
+            // добовляем ученика во все группы, в которых он состоит
+            for (String i: consist_class){
+                if (i=="") continue;
+                school.getClasses().get(Integer.valueOf(i)).addLearner(l);
+            }
+            for (String i: consist_elective){
+                if (i=="") continue;
+                school.getElectives().get(Integer.valueOf(i)).addLearner(l);
+            }
+            for (String i: consist_section){
+                if (i=="") continue;
+                school.getSections().get(Integer.valueOf(i)).addLearner(l);
+            }
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setLearners(learners);
+        // считывание из базы employees
+        ArrayList<Employee> employees = new ArrayList<Employee>();
+        cursor = db.rawQuery("select * from employees", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Employee e = new Employee(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
+            employees.add(e);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setEmployees(employees);
+        // считывание из базы participants
+        ArrayList<Participant> participants = new ArrayList<Participant>();
+        cursor = db.rawQuery("select * from participants", null);
+        cursor.moveToFirst();
+        while(cursor.getCount()!=0){
+            Participant p = new Participant(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            participants.add(p);
+
+            cursor.moveToNext();
+            if(cursor.isAfterLast()) break;
+        }
+        school.setParticipants(participants);
+        // закрытие базы данных
+        db.close();
+    }
+
+
     // функции для ДОБАВЛЕНИЕ
     // перегрузки функции, которая добавляет выбранную категорию в подходящий список у school
     @Override
@@ -204,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
                     break;
                 }
             }
-            if (bol){
+            if (bol && other_learners.length!=0){ // второе условие, т.к возникает ошибка java.lang.ArrayIndexOutOfBoundsException: length=0; index=0 на строку ниже
                 other_learners[k++]=fullName;
             }
         }
@@ -238,23 +447,30 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         // взятие значение из возвращенного Intent data
+        if (data==null) System.out.println("NUll MF");
         String selected_learner=data.getStringExtra("selected_learner");
         String selected_teacher=data.getStringExtra("selected_teacher");
+        Learner learner = school.getLearnerByName(selected_learner); // получаем объект ученика
 
         switch (resultCode){
             case 1: // запрос на добавление
                 System.out.println("Добавление запущено");
-                Learner learner = school.getLearnerByName(selected_learner); // получаем объект ученика
                 // добавляем в нужную категорию по индексу
                 switch(selected_category0){
                     case "Класс":
-                        school.getClasses().get(selected_index0).addLearner(learner);
+                        Class c = school.getClasses().get(selected_index0);
+                        c.addLearner(learner);
+                        learner.addConsist("Класс", String.valueOf(c.getIndex()));
                         break;
                     case "Электив":
-                        school.getElectives().get(selected_index0).addLearner(learner);
+                        Elective e = school.getElectives().get(selected_index0);
+                        e.addLearner(learner);
+                        learner.addConsist("Электив", String.valueOf(e.getIndex()));
                         break;
                     case "Секция":
-                        school.getSections().get(selected_index0).addLearner(learner);
+                        Section s = school.getSections().get(selected_index0);
+                        s.addLearner(learner);
+                        learner.addConsist("Секция", String.valueOf(s.getIndex()));
                         break;
                 }
                 break;
@@ -263,17 +479,27 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
                 // удаляем из нужной категории по индексу
                 switch(selected_category0){
                     case "Класс":
-                        school.getClasses().get(selected_index0).deleteLearnerByName(selected_learner);
+                        Class c = school.getClasses().get(selected_index0);
+                        c.deleteLearnerByName(selected_learner);
+                        learner.deleteConsist("Класс", String.valueOf(c.getIndex()));
                         break;
                     case "Электив":
-                        school.getElectives().get(selected_index0).deleteLearnerByName(selected_learner);
+                        Elective e = school.getElectives().get(selected_index0);
+                        e.deleteLearnerByName(selected_learner);
+                        learner.deleteConsist("Электив", String.valueOf(e.getIndex()));
                         break;
                     case "Секция":
-                        school.getSections().get(selected_index0).deleteLearnerByName(selected_learner);
+                        Section s = school.getSections().get(selected_index0);
+                        s.deleteLearnerByName(selected_learner);
+                        learner.deleteConsist("Секция", String.valueOf(s.getIndex()));
                         break;
                 }
                 break;
         }
+
+        // обновления объекта ученика после изменений с индексами групп
+        school.updateLearner(learner);
+
         // перезапись учителя
         Teacher teacher = school.getTeacherByName(selected_teacher);
          // изменяем нужную категорию по индексу

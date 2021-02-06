@@ -1,8 +1,9 @@
 package com.example.e_journal.school;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class School {
+public class School implements Serializable {
     ArrayList<Employee> employees=new ArrayList<Employee>();
     ArrayList<Teacher> teachers=new ArrayList<Teacher>();
     ArrayList<Learner> learners=new ArrayList<Learner>();
@@ -61,6 +62,37 @@ public class School {
         }
         return list;
     }
+    /* Для меню РАБОТЫ С БАЗОЙ */
+    public void setLearners(ArrayList<Learner> learners){
+        this.learners = learners;
+    }
+    public void setTeachers(ArrayList<Teacher> teachers){
+        this.teachers = teachers;
+    }
+    public void setEmployees(ArrayList<Employee> employees){
+        this.employees = employees;
+    }
+    public void setParticipants(ArrayList<Participant> participants){
+        this.participants = participants; }
+    public void setClasses(ArrayList<Class> classes){
+        this.classes = classes;
+    }
+    public void setElectives(ArrayList<Elective> electives){
+        this.electives = electives;
+    }
+    public void setSections(ArrayList<Section> sections){
+        this.sections = sections;
+    }
+
+    public void updateLearner(Learner l){
+        String fullName = l.getFullName();
+        for (int i=0;i<learners.size();i++){
+            if (fullName.equals(learners.get(i).getFullName())){
+                learners.set(i, l);
+                break;
+            }
+        }
+    }
 
     /* Для меню ГРУППЫ */
     public ArrayList<Class> getClasses(){
@@ -75,6 +107,8 @@ public class School {
 
     public  ArrayList<Learner> getLearners(){ return this.learners;}
     public  ArrayList<Teacher> getTeachers(){return this.teachers;}
+    public  ArrayList<Employee> getEmployees(){return this.employees;}
+    public  ArrayList<Participant> getParticipants(){return this.participants;}
 
     public Learner getLearnerByName(String fullName){
         for (Learner i:learners){
@@ -82,7 +116,8 @@ public class School {
                 return i;
             }
         }
-        return learners.get(0);
+        Learner empty = new Learner();
+        return empty;
     }
     public Teacher getTeacherByName(String fullName){
         for (Teacher i:teachers){
@@ -90,7 +125,8 @@ public class School {
                 return i;
             }
         }
-        return teachers.get(0);
+        Teacher empty = new Teacher();
+        return empty;
     }
 
     /* Для меню ДОБАВЛЕНИЕ */

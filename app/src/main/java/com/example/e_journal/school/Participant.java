@@ -7,4 +7,8 @@ public class Participant extends Person{
         super(fullName, phone);
         this.cardID=cardID;
     }
+
+    public String getCardID(){
+        return this.cardID;
+    }
 }

@@ -52,6 +52,9 @@
         <item>Электив</item>
         <item>Секция</item>
     </string-array>
+    <!--Строки для РАБОТЫ С БАЗОЙ ДАННЫХ-->
+    <string name="action_save">Сохранить в базу данных</string>
+    <string name="action_download">Загрузить из базы данных</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

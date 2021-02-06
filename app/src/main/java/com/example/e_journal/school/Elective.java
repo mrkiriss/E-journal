@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Elective extends Group implements Serializable {
     String academicSubject;
 
-    Elective(String academicSubject, ArrayList<Learner> learners, Teacher classTeacher){
+    public Elective(String academicSubject, Teacher classTeacher, ArrayList<Learner> learners){
         super(classTeacher, learners);
         this.academicSubject=academicSubject;
     }

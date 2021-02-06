@@ -200,8 +200,9 @@ public class DocumentsFragment extends Fragment {
                         break;
                     case "Список учеников класса вместе с родителями":
                         // получение экземляра класса, который был выбран
-                        String selected_name = spinner_classes.getSelectedItem().toString();
-                        Class c = null;
+                        String selected_name = "There are no classes. Add a class";
+                        if (spinner_classes.getChildCount()!=0) selected_name = spinner_classes.getSelectedItem().toString();
+                        Class c = new Class();
                         for (Class i: classes0){
                             if (i.getNumber().equals(selected_name)){
                                 c=i;

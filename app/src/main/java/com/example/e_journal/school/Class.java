@@ -14,6 +14,11 @@ public class Class extends Group implements Serializable {
         this.number=number;
         this.index=index;
     }
+    public Class(){
+        this.number="";
+        this.classTeacher = new Teacher();
+        this.learners= new ArrayList<Learner>();
+    }
 
     public String getNumber(){
         return this.number;

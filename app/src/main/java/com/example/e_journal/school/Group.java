@@ -95,13 +95,4 @@ public class Group {
         System.out.println("Количество учеников в новом массиве после удалеиня"+learners_new.size());
     }
 
-
-
-
-//    // добавление ученика в группу
-//    void addLearner(String fullName, String phone, String cardID, ArrayList<Parent> parents, String age){
-//        Learner l= new Learner(fullName, phone, cardID, parents, age);
-//        learners.add(l);
-//    }
-
 }

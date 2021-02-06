@@ -57,8 +57,10 @@ public class GroupEditorActivity extends AppCompatActivity {
 
             if (current_teacher.equals(teachers[j])) current_teacher_index=j;
         }
-        RadioButton radio0 = (RadioButton) radio_group.getChildAt(current_teacher_index);
-        radio0.setChecked(true);
+        if (teachers.length!=0) {
+            RadioButton radio0 = (RadioButton) radio_group.getChildAt(current_teacher_index);
+            radio0.setChecked(true);
+        }
 
 
         // установка слушателя на кнопку добавления ученика
@@ -82,7 +84,7 @@ public class GroupEditorActivity extends AppCompatActivity {
             }
         });
 
-        // установка слушателя на кнопку добавления ученика
+        // установка слушателя на кнопку удалить ученика
         findViewById(R.id.button_accept_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,10 +111,14 @@ public class GroupEditorActivity extends AppCompatActivity {
                 // выгрузка выбранного учителя
                 RadioGroup radio_group = findViewById(R.id.radio_group);
                 RadioButton radio = findViewById(radio_group.getCheckedRadioButtonId());
-                String selected_teacher = radio.getText().toString();
+                String selected_teacher = new String();
+                if (radio_group.getChildCount()!=0){
+                    selected_teacher = radio.getText().toString();
+                }
 
                 Intent back = new Intent(getApplicationContext(), MainActivity.class);
                 back.putExtra("selected_learner", "");
+                if (selected_teacher==null) selected_teacher="There are no teachers. Add a teacher";
                 back.putExtra("selected_teacher", selected_teacher);
                 setResult(0, back);
                 finish();

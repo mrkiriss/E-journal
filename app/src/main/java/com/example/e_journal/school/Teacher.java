@@ -1,5 +1,7 @@
 package com.example.e_journal.school;
 
+import java.util.ArrayList;
+
 public class Teacher extends Participant{
     String position;
     String qualification;
@@ -14,8 +16,12 @@ public class Teacher extends Participant{
         this.position="";
         this.qualification="";
     }
-    public String getName(){
-        return this.fullName;
+
+    public String getPosition(){
+        return this.position;
+    }
+    public String getQualification(){
+        return this.qualification;
     }
 
 }

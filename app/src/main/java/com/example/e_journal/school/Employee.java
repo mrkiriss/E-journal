@@ -7,4 +7,6 @@ public class Employee extends Participant{
         super(fullName, phone, cardID);
         this.position=position;
     }
+
+    public String getPosition(){return this.position;}
 }

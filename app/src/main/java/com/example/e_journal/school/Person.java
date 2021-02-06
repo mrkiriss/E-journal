@@ -11,5 +11,8 @@ public class Person {
     public String getFullName(){
         return this.fullName;
     }
+    public String getPhone(){
+        return this.phone;
+    }
 
 }
