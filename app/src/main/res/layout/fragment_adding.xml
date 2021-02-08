@@ -31,7 +31,8 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
         <EditText
             android:id="@+id/text_fullName"
@@ -159,6 +160,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
+        android:padding="10dp"
         android:text="@string/button_accept" />
 
     <Button
@@ -166,5 +168,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:enabled="false"
+        android:padding="10dp"
         android:text="@string/button_cancel" />
 </LinearLayout>

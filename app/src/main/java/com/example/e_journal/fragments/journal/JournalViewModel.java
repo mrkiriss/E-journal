@@ -4,11 +4,11 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class JournalViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public JournalViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
     }

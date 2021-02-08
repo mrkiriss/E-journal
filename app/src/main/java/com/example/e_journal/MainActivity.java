@@ -1,9 +1,11 @@
 package com.example.e_journal;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.support.design.widget.NavigationView;
 
@@ -15,12 +17,16 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.e_journal.interfaces.AddingPostman;
 import com.example.e_journal.interfaces.DocumentsPostman;
 import com.example.e_journal.interfaces.GroupsPostman;
+import com.example.e_journal.interfaces.JournalPostman;
 import com.example.e_journal.school.Class;
 import com.example.e_journal.school.Elective;
 import com.example.e_journal.school.Employee;
@@ -32,49 +38,58 @@ import com.example.e_journal.school.Section;
 import com.example.e_journal.school.Teacher;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
-public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman {
+public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman, JournalPostman {
 
     // экземпляр класса School
     School school= new School();
     // экземляр класса DBHelper
     DBHelper dbHelper = new DBHelper(this);
-/*
-    void addData(){
-        Parent l1_p1 = new Parent("Воскребенцева.О.С", "+79127090525");
-        Parent l1_p2 = new Parent("Воскребенцева.А.В", "+79127139099");
-        ArrayList<Parent> prnts = new ArrayList<Parent>();
-        prnts.add(l1_p1);prnts.add(l1_p2);
-        Learner l1 = new Learner("Воскребенцев.К.А", "+7912718314", "175", prnts, "18");
-
-        Parent l2_p1 = new Parent("Онегина.О.С", "+12349");
-        Parent l2_p2 = new Parent("Сергеич.А.В", "+5644685888888");
-        ArrayList<Parent> prnts2 = new ArrayList<Parent>();
-        prnts2.add(l2_p1);prnts2.add(l2_p2);
-        Learner l2 = new Learner("Лесков.К.А", "+7777777777777", "666", prnts2, "17");
-
-        ArrayList<Learner> lrnrs= new ArrayList<Learner>();
-        lrnrs.add(l1);lrnrs.add(l2);
-
-        Teacher t1 = new Teacher("КарлишунаЛА", "+7900000000000", "000", "учитель-бог", "нормалёк");
-        Teacher t2 = new Teacher("ПлетенёваКК", "+123456789", "999", "учитель-математик", "ну так");
-
-        Class сlass1 = new Class("1", t1, lrnrs);
-
-        school.addLearner(l1);school.addLearner(l2);
-        school.addTeacher(t1);school.addTeacher(t2);
-        school.addClass(сlass1);
-    }
-*/
+    // доступ для работы с базой
+    boolean access =false;
     // ---программне функции---
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+/*
+        // временные данные
+        ArrayList<Parent> p= new ArrayList<>();
+        p.add(new Parent());p.add(new Parent());
 
-        //addData(); // начальные данный для проверки коректности программы
+        Learner l1 = new Learner("Воскребенцев","+79127183014", "175", p,"18");
+        Learner l2 = new Learner("Лесков","+79127090525", "1075", p,"14");
 
+        school.addLearner(l1);school.addLearner(l2);
+
+        Class c = new Class("1");
+
+        HashMap<String, HashMap<String, String>> schedule = new HashMap<>();
+        HashMap<String, String> lessons= new HashMap<>();
+        lessons.put("Физика","Кошкина");lessons.put("Математика","Плетенёав");lessons.put("Гуси","Гусева");lessons.put("Стрельба","Сергеич");
+        schedule.put("7",lessons);
+
+        c.setIndex(0);
+
+        c.setSchedule(schedule);
+        c.addLearner(l1);c.addLearner(l2);
+
+        HashMap<String, HashMap<String, HashMap<String, String>>> journal = new HashMap<>();
+        HashMap<String, String> learners = new HashMap<>();
+        learners.put("Воскребенцев", "5");learners.put("Лесков", "Н");
+        HashMap<String, HashMap<String, String>> lesson_teacher = new HashMap<>();
+        lesson_teacher.put("Физика_Кошкина", learners);
+        lesson_teacher.put("Математика_плетенёва", learners);
+        journal.put("07-02-2021", lesson_teacher);
+        journal.put("07-03-2021", lesson_teacher);
+        c.setJournal(journal);
+        System.out.println(journal);
+        c.convertStringToJournal(journal.toString());
+
+        school.addClass(c);
+*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -91,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
     }
 
     @Override
@@ -104,15 +120,34 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.action_upload:
-                Toast.makeText(getApplicationContext(), "Start upload", Toast.LENGTH_SHORT).show();
-                uploadDatabase();
-                Toast.makeText(getApplicationContext(), "Upload completed successful", Toast.LENGTH_SHORT).show();
+                if (access) {
+                    Toast.makeText(getApplicationContext(), "Start upload", Toast.LENGTH_SHORT).show();
+                    uploadDatabase();
+                    Toast.makeText(getApplicationContext(), "Upload completed successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Upload canceled", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Отсутсвует доступ для работы с базой", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.action_download:
-                Toast.makeText(getApplicationContext(), "Start download", Toast.LENGTH_SHORT).show();
-                downloadDatabase();
-                Toast.makeText(getApplicationContext(), "Download completed successful", Toast.LENGTH_SHORT).show();
+                if (access) {
+                    Toast.makeText(getApplicationContext(), "Start download", Toast.LENGTH_SHORT).show();
+                    downloadDatabase();
+                    Toast.makeText(getApplicationContext(), "Download completed successful", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Отсутсвует доступ для работы с базой", Toast.LENGTH_SHORT).show();
+                }
                 break;
+            case R.id.action_access:
+                if (access){
+                    access=false;
+                    Toast.makeText(getApplicationContext(), "Доступ запрещен", Toast.LENGTH_SHORT).show();
+                    item.setTitle("Получить доступ");
+                }else{
+                    access=true;
+                    Toast.makeText(getApplicationContext(), "Доступ резрещен", Toast.LENGTH_SHORT).show();
+                    item.setTitle("Отозвать доступ");
+                }
         }
         return false;
     }
@@ -129,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     // ----------авторские функции----------
 
     // функции ДЛЯ работы с БАЗОЙ sql
-    void uploadDatabase(){
+    private void uploadDatabase(){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // внесение в базу learners
@@ -170,10 +205,10 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         }
         // внесение в базу classes
         db.execSQL("DROP TABLE IF EXISTS " + "classes");
-        db.execSQL("CREATE TABLE classes (fullName STRING, teacher STRING)");
+        db.execSQL("CREATE TABLE classes (fullName STRING, teacher STRING, journal STRING, schedule STRING)");
         for (Class i: school.getClasses()){
-            String data = "'"+i.getNumber()+"', '"+i.getTeacher().getFullName()+"'";
-            db.execSQL(" INSERT INTO classes " + "(fullName, teacher)" +
+            String data = "'"+i.getNumber()+"', '"+i.getTeacher().getFullName()+"', '"+i.getJournal().toString()+"', '"+i.getSchedule().toString()+"'";
+            db.execSQL(" INSERT INTO classes " + "(fullName, teacher, journal, schedule)" +
                     "VALUES (" + data + ")");
         }
         // внесение в базу electives
@@ -195,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         // закрытие базы данных
         db.close();
     }
-    void downloadDatabase(){
+    private void downloadDatabase(){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // считывание из базы teachers
@@ -216,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         cursor.moveToFirst();
         while(cursor.getCount()!=0){
             Class c = new Class(cursor.getString(0), school.getTeacherByName(cursor.getString(1)), new ArrayList<Learner>());
+            c.convertStringToJournal(cursor.getString(2)); // journal
+            c.convertStringToSchedule(cursor.getString(3)); // schedule
             classes.add(c);
 
             cursor.moveToNext();
@@ -306,7 +343,6 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         // закрытие базы данных
         db.close();
     }
-
 
     // функции для ДОБАВЛЕНИЕ
     // перегрузки функции, которая добавляет выбранную категорию в подходящий список у school
@@ -444,7 +480,6 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         startActivityForResult(intent, 0);
     }
     // принимает значения из Активности Редактирования, заного вызывает её
-
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         // взятие значение из возвращенного Intent data
         if (data==null) System.out.println("NUll MF");
@@ -520,6 +555,14 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         }else {
             startEditActivity(selected_category0, selected_index0); // повторный вызов Активити Редактирования
         }
+    }
+
+    // функции для фрагмента ЖУРНАЛ
+    public School getSchool(){
+        return school;
+    }
+    public void updateClasses(Class c){
+        school.updateClass(c);
     }
 
 }

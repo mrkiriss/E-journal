@@ -14,6 +14,17 @@ public class School implements Serializable {
     String adress;
     String name;
 
+    /* Для меню ЖУРНАЛ */
+    public void updateClass(Class c){
+        String number = c.getNumber();
+        for (int i=0; i<this.classes.size(); i++){
+            if (number.equals(this.classes.get(i).getNumber())){
+                this.classes.set(i,c);
+                break;
+            }
+        }
+    }
+
     /* Для меню ДОКУМЕНТЫ */
     //  список преподавательского состава с указанием квалификации
     public ArrayList<String[]> getListTeachers(){
@@ -62,6 +73,7 @@ public class School implements Serializable {
         }
         return list;
     }
+
     /* Для меню РАБОТЫ С БАЗОЙ */
     public void setLearners(ArrayList<Learner> learners){
         this.learners = learners;

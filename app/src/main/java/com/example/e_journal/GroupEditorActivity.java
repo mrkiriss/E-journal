@@ -73,7 +73,8 @@ public class GroupEditorActivity extends AppCompatActivity {
                 // выгрузка выбранного учителя
                 RadioGroup radio_group = findViewById(R.id.radio_group);
                 RadioButton radio = findViewById(radio_group.getCheckedRadioButtonId());
-                String selected_teacher = radio.getText().toString();
+                String selected_teacher = "";
+                if (!current_teacher.equals("")){ selected_teacher = radio.getText().toString();}
 
                 Intent back = new Intent(getApplicationContext(), MainActivity.class);
                 back.putExtra("selected_learner", selected_learner);

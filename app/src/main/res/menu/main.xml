@@ -6,11 +6,14 @@
         android:icon="@drawable/ic_upload"
         android:orderInCategory="100"
         android:title="@string/action_save"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_download"
         android:icon="@drawable/ic_download"
         android:orderInCategory="100"
         android:title="@string/action_download"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_access"
+        android:title="@string/action_access" />
 </menu>

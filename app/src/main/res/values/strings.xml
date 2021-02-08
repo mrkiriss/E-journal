@@ -3,7 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">E-journal</string>
-    <string name="nav_header_subtitle">kvoskrebentsev@mail.ru</string>
+    <string name="nav_header_subtitle">© kvoskrebentsev@mail.ru</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -12,6 +12,12 @@
     <string name="menu_adding">Добавление</string>
     <string name="menu_groups">Группы</string>
     <string name="menu_find">Поиск</string>
+    <!--Строки для ЖУРНАЛ-->
+    <string name="text_choose_class">Выберите класс</string>
+    <string name="text_choose_date">Введите дату</string>
+    <string name="text_choose_lesson">Выберите предмет</string>
+    <string name="text_annotation"></string>
+    <string name="button_journal_exit">Завершить просмотр</string>
     <!--Строки для ДОКУМЕНТЫ-->
     <string name="label_instruction">Выберите документ, который хотите сгенерировать</string>
     <string name="label_classes">Выберите номер класса</string>
@@ -55,6 +61,7 @@
     <!--Строки для РАБОТЫ С БАЗОЙ ДАННЫХ-->
     <string name="action_save">Сохранить в базу данных</string>
     <string name="action_download">Загрузить из базы данных</string>
+    <string name="action_access">Получить доступ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
