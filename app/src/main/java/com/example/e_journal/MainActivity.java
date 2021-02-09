@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
                     Toast.makeText(getApplicationContext(), "Start upload", Toast.LENGTH_SHORT).show();
                     uploadDatabase();
                     Toast.makeText(getApplicationContext(), "Upload completed successful", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(getApplicationContext(), "Upload canceled", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getApplicationContext(), "Отсутсвует доступ для работы с базой", Toast.LENGTH_SHORT).show();
                 }
@@ -472,23 +471,38 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
         for (Teacher i: school.getTeachers()){
             teachers[k++]=i.getFullName();
         }
+        // получаем расписание выбранного класса
+        HashMap<String, HashMap<String, String>> schedule = new HashMap<>();
+        if (selected_category0.equals("Класс")) {
+            schedule = school.getClasses().get(selected_index0).getSchedule();
+        }
         // заполняем данные и посылаем в активити
         intent.putExtra("current_learners", current_learners);
         intent.putExtra("other_learners", other_learners);
         intent.putExtra("current_teacher", current_teacher);
         intent.putExtra("teachers", teachers);
+        if (selected_category0.equals("Класс")){
+            intent.putExtra("category", "Класс");
+            intent.putExtra("schedule", schedule.toString());
+        }else {
+            intent.putExtra("category", "");
+        }
         startActivityForResult(intent, 0);
     }
+
     // принимает значения из Активности Редактирования, заного вызывает её
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         // взятие значение из возвращенного Intent data
         if (data==null) System.out.println("NUll MF");
-        String selected_learner=data.getStringExtra("selected_learner");
+        System.out.println("Код результата: "+resultCode);
+        String selected_learner="";
         String selected_teacher=data.getStringExtra("selected_teacher");
-        Learner learner = school.getLearnerByName(selected_learner); // получаем объект ученика
+        Learner learner=new Learner();
 
         switch (resultCode){
             case 1: // запрос на добавление
+                selected_learner=data.getStringExtra("selected_learner");
+                learner = school.getLearnerByName(selected_learner); // получаем объект ученика
                 System.out.println("Добавление запущено");
                 // добавляем в нужную категорию по индексу
                 switch(selected_category0){
@@ -510,6 +524,8 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
                 }
                 break;
             case -1: // запрос на удаление
+                selected_learner=data.getStringExtra("selected_learner");
+                learner = school.getLearnerByName(selected_learner); // получаем объект ученика
                 System.out.println("Удаление запущено");
                 // удаляем из нужной категории по индексу
                 switch(selected_category0){
@@ -530,6 +546,14 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
                         break;
                 }
                 break;
+            case 2: // обновление schedule класса
+                System.out.println("+++++++++++++++++++++++++++++++++++++++++++обновление schedule класса");
+                String schedule = data.getStringExtra("schedule");
+                Class c = school.getClasses().get(selected_index0);
+                c.convertStringToSchedule(schedule);
+                school.updateClass(c);
+                break;
+
         }
 
         // обновления объекта ученика после изменений с индексами групп

@@ -45,6 +45,32 @@
     <string name="button_accept_adding">Подтвердить добавление</string>
     <string name="button_accept_deleting">Подтвердить удаление</string>
     <string name="button_exit">Выйти из режима редактирования</string>
+    <string name="text_schedule_instruction">Изменение расписания класса</string>
+    <string name="text_choose_dayOfWeek">Выберите день недели</string>
+    <string name="text_choose_number_lessons">Выберите количество уроков</string>
+    <string name="button_edit_schedule">Изменить расписание</string>
+    <string name="button_create_form">Создать форму для ввода расписания</string>
+
+    <string-array name="spinner_week_days">
+        <item>Понедельник</item>
+        <item>Вторник</item>
+        <item>Среда</item>
+        <item>Четверг</item>
+        <item>Пятница</item>
+        <item>Суббота</item>
+        <item>Воскресенье</item>
+    </string-array>
+    <string-array name="spinner_number_lessons">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+
     <!--Строки для ДОБАВЛЕНИЯ-->
     <string name="label_add">Выберите категорию объекта, который будет добавлен</string>
     <string name="button_continue">Продолжить</string>

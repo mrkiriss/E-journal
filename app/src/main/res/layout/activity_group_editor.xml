@@ -8,10 +8,99 @@
     tools:context=".GroupEditorActivity">
 
     <LinearLayout
+        android:id="@+id/container_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="7"
+        android:fadeScrollbars="false"
+        android:isScrollContainer="false"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_schedule_instruction" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_choose_dayOfWeek" />
+
+                <Spinner
+                    android:id="@+id/spinner_number_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_week_days" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_choose_number_lessons" />
+
+                <Spinner
+                    android:id="@+id/spinner_number_lessons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/spinner_number_lessons" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_create_schedule_form"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="@string/button_create_form" />
+
+        <TableLayout
+            android:id="@+id/table_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp" />
+
+        <Button
+            android:id="@+id/button_edit_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="@string/button_edit_schedule" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#151414" />
+
+    <LinearLayout
         android:id="@+id/container_add_learner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -33,11 +122,17 @@
             android:text="@string/button_accept_adding" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#151414" />
+
     <LinearLayout
         android:id="@+id/container_delete_learner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -59,11 +154,17 @@
             android:text="@string/button_accept_deleting" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#151414" />
+
     <LinearLayout
         android:id="@+id/container_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="25"
+        android:layout_weight="5"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -79,11 +180,15 @@
             android:layout_height="match_parent" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#151414" />
+
     <Button
         android:id="@+id/button_exit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="finishA"
         android:text="@string/button_exit" />
 </LinearLayout>

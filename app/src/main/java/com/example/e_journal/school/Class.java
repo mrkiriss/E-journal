@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Class extends Group {
     String number;
     HashMap<String, HashMap<String, String>> schedule = new HashMap<>(); // хранение расписания по дням недели {день недели: {предмет: учитель, ...}, ...}
-    HashMap<String, HashMap<String, HashMap<String, String>>> journal= new HashMap<>(); // хранение страниц журнала { дата: {предмет: [{имя: оценка, имя: оценка, ... }, учитель ], ... }, ... }
+    HashMap<String, HashMap<String, HashMap<String, String>>> journal= new HashMap<>(); // хранение страниц журнала {07-03-2021={Физика_Кошкина={Воскребенцев=5, Лесков=Н}, Математика_плетенёва={Воскребенцев=5, Лесков=Н}}, ...}
 
     public Class(String number, Teacher classTeacher, ArrayList<Learner> learners){
         super(classTeacher, learners);
