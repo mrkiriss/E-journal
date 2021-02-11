@@ -11,7 +11,7 @@ E-journal - мобильное приложение, которое поможе
 
 # Компоненты программы, их внешний вид
 ## Меню программы
-
+![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_menu.png)
 ## Вкладка "Журнал"
 ![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_journal_1.png)
 ![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_journal_2.png)
@@ -23,3 +23,4 @@ E-journal - мобильное приложение, которое поможе
 ![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_groups_1.png)
 ![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_groups_2.png)
 ## Вкладка "Поиск"
+![Oops! Something went wrong](https://github.com/mrkiriss/E-journal/blob/main/pictures/screen_find.png)
