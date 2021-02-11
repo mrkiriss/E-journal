@@ -297,6 +297,7 @@ public class groups extends Fragment {
             }
         });
 
+        // листенер на кнопку РЕЖИМ РЕДАКТИРОВАНИЯ (запускает Активити Редактирования)
         v.findViewById(R.id.button_redactor_mod).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

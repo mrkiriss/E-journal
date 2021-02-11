@@ -54,6 +54,9 @@ public class Class extends Group {
         for (String lvl1_item0: lvl1){
             String lvl1_item=lvl1_item0;
             // парсим и удаляем дату
+
+            if (lvl1_item.indexOf("=")==-1) break;
+
             String lvl1_date = lvl1_item.substring(0,lvl1_item.indexOf("="));
             lvl1_item = lvl1_item.replaceFirst(lvl1_date+"=","");
             // парсим в lvl2 бъекты на втором слое:   Физика_Кошкина={Воскребенцев=5, Лесков=Н}
@@ -123,6 +126,9 @@ public class Class extends Group {
         for (String lvl1_item0: lvl1){
             String lvl1_item = lvl1_item0;
             // парсим и удаляем день недели
+
+            if (lvl1_item.indexOf("=")==-1) break;
+
             String lvl1_dayOfWeek =lvl1_item.substring(0,lvl1_item.indexOf("="));
             lvl1_item = lvl1_item.replaceFirst(lvl1_dayOfWeek+"=","");
             // парсим в lvl2 бъекты на втором слое

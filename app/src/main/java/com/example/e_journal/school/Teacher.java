@@ -24,4 +24,14 @@ public class Teacher extends Participant{
         return this.qualification;
     }
 
+    public String toString(){
+        String result="";
+        result+="Категория: Учитель"+"\n";
+        result+="ФИО: "+fullName+"\n";
+        result+="Норер телефона: "+phone+"\n";
+        result+="ID: "+cardID+"\n";
+        result+="Должность: "+position+"\n";
+        result+="Квалификация: "+qualification+"\n";
+        return result;
+    }
 }

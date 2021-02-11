@@ -117,4 +117,16 @@ public class Learner extends Participant{
         }
         return result;
     }
+
+    public String toString(){
+        String result="";
+        result+="Категория: Ученик"+"\n";
+        result+="ФИО: "+fullName+"\n";
+        result+="Норер телефона: "+phone+"\n";
+        result+="ID: "+cardID+"\n";
+        result+="Возраст: "+age+"\n";
+        result+="Родитель1: "+ parents.get(0).getFullName()+" ("+parents.get(0).getPhone()+")"+"\n";
+        result+="Родитель2: "+ parents.get(1).getFullName()+" ("+parents.get(1).getPhone()+")"+"\n";
+        return result;
+    }
 }

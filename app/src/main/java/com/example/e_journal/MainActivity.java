@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.e_journal.interfaces.AddingPostman;
 import com.example.e_journal.interfaces.DocumentsPostman;
+import com.example.e_journal.interfaces.FindPostman;
 import com.example.e_journal.interfaces.GroupsPostman;
 import com.example.e_journal.interfaces.JournalPostman;
 import com.example.e_journal.school.Class;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman, JournalPostman {
+public class MainActivity extends AppCompatActivity implements AddingPostman, DocumentsPostman, GroupsPostman, JournalPostman, FindPostman {
 
     // экземпляр класса School
     School school= new School();

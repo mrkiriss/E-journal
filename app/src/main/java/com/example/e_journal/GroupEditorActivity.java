@@ -228,6 +228,9 @@ public class GroupEditorActivity extends AppCompatActivity {
                 container_teacher.setVisibility(View.GONE);
                 // разблокирование кнопки парсинга результатов заполнения
                 button_edit_schedule.setEnabled(true);
+                // отключения выбора дня недели и количества уроков
+                spinner_number_day.setEnabled(false);
+                spinner_number_lessons.setEnabled(false);
             }
 
         });

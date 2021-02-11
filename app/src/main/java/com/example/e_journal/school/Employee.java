@@ -9,4 +9,14 @@ public class Employee extends Participant{
     }
 
     public String getPosition(){return this.position;}
+
+    public String toString(){
+        String result="";
+        result+="Категория: Работник"+"\n";
+        result+="ФИО: "+fullName+"\n";
+        result+="Норер телефона: "+phone+"\n";
+        result+="ID: "+cardID+"\n";
+        result+="Должность: "+position+"\n";
+        return result;
+    }
 }

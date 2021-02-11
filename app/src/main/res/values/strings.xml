@@ -90,5 +90,14 @@
     <string name="action_access">Получить доступ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Строки для ПОИСК-->
+    <string name="text_find">Выберите параметр объекта, по которому будет проведен поиск</string>
+    <string-array name="spinner_parameter">
+        <item>ФИО</item>
+        <item>ID</item>
+        <item>Номер телефона</item>
+    </string-array>
+    <string name="button_find">Начать поиск</string>
+    <string name="hint_find">Введите значение</string>
 
 </resources>

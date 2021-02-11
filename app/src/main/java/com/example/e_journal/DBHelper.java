@@ -8,11 +8,6 @@ import android.support.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "school.db"; // название бд
     private static final int VERSION = 1; // версия базы данных
-     static final String TABLE_LEARNERS = "learners";
-     static final String TABLE_TEACHERS = "teacher";
-     static final String TABLE_EMPLOYEES = "employees";
-     static final String TABLE_PARTICIPANTS = "participants";
-
 
     public DBHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, VERSION);
