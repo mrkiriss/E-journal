@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class GroupEditorActivity extends AppCompatActivity {
 
     // глобальные переменные
     private String selected_dayOfWeek;
-    private HashMap<String, HashMap<String, String>> schedule = new HashMap<>();
+    private HashMap<String, HashMap<String, String>> schedule = new HashMap<String, HashMap<String, String>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class GroupEditorActivity extends AppCompatActivity {
 
         if (i.getStringExtra("category").equals("Класс")){
             schedule=convertStringToSchedule(i.getStringExtra("schedule"));
+            if (schedule==null) System.out.println("Расписание null");
             container_schedule.setVisibility(View.VISIBLE);
         }else{
             container_schedule.setVisibility(View.GONE);
@@ -195,6 +197,7 @@ public class GroupEditorActivity extends AppCompatActivity {
                 }
                 // получение количества уроков
                 int number_lessons=Integer.valueOf(spinner_number_lessons.getSelectedItem().toString());
+
                 // адаптер для вып. списка учителей
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_item, teachers);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -222,10 +225,12 @@ public class GroupEditorActivity extends AppCompatActivity {
 
                     table_schedule.addView(row);
                 }
+                /*
                 // сокрытие остальных контейнеров, для увеличения вместимости
                 container_add.setVisibility(View.GONE);
                 container_delete.setVisibility(View.GONE);
                 container_teacher.setVisibility(View.GONE);
+                 */
                 // разблокирование кнопки парсинга результатов заполнения
                 button_edit_schedule.setEnabled(true);
                 // отключения выбора дня недели и количества уроков
@@ -239,12 +244,18 @@ public class GroupEditorActivity extends AppCompatActivity {
         findViewById(R.id.button_edit_schedule).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("Редактирование расписания начата");
                 HashMap<String, String> lesson_teacher = new HashMap<>();
                 for (int i=1;i<table_schedule.getChildCount();i++){
                     TableRow row= (TableRow) table_schedule.getChildAt(i);
                     EditText item0 = (EditText) row.getChildAt(0);
                     Spinner item1= (Spinner) row.getChildAt(1);
-                    lesson_teacher.put(item0.getText().toString(), item1.getSelectedItem().toString());
+                    // не выбран учитель
+                    if(item1.getSelectedItem()==null){
+                        lesson_teacher.put(item0.getText().toString(), "");
+                    }else {
+                        lesson_teacher.put(item0.getText().toString(), item1.getSelectedItem().toString());
+                    }
                 }
                 // обновляем schedule
                 schedule.put(selected_dayOfWeek, lesson_teacher);
@@ -300,6 +311,9 @@ public class GroupEditorActivity extends AppCompatActivity {
         for (String lvl1_item0: lvl1){
             String lvl1_item = lvl1_item0;
             // парсим и удаляем день недели
+
+            if (lvl1_item.indexOf("=")==-1) return new HashMap<>();
+
             String lvl1_dayOfWeek =lvl1_item.substring(0,lvl1_item.indexOf("="));
             lvl1_item = lvl1_item.replaceFirst(lvl1_dayOfWeek+"=","");
             // парсим в lvl2 бъекты на втором слое

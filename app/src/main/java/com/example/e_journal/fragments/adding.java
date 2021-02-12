@@ -216,6 +216,7 @@ public class adding extends Fragment {
                         phone.setVisibility(View.GONE);
                         cardID.setVisibility(View.GONE);
                         position.setVisibility(View.GONE);
+                        break;
                     case "Класс":
                         // проверка на заполнение всех полей
                         if (fullName.getText().toString().equals("") ){

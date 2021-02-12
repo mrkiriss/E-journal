@@ -128,34 +128,39 @@
             android:text="@string/button_accept" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/container_journal_result"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/text_journal_information"
+        <LinearLayout
+            android:id="@+id/container_journal_result"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:padding="10dp"
-            android:textAlignment="center" />
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TableLayout
-            android:id="@+id/table_journal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="30"
-            android:padding="10dp" />
+            <TextView
+                android:id="@+id/text_journal_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="10dp"
+                android:textAlignment="center" />
 
-        <Button
-            android:id="@+id/button_journal_clear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_journal_exit" />
-    </LinearLayout>
+            <TableLayout
+                android:id="@+id/table_journal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="30"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/button_journal_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/button_journal_exit" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

@@ -55,42 +55,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-/*
-        // временные данные
-        ArrayList<Parent> p= new ArrayList<>();
-        p.add(new Parent());p.add(new Parent());
 
-        Learner l1 = new Learner("Воскребенцев","+79127183014", "175", p,"18");
-        Learner l2 = new Learner("Лесков","+79127090525", "1075", p,"14");
-
-        school.addLearner(l1);school.addLearner(l2);
-
-        Class c = new Class("1");
-
-        HashMap<String, HashMap<String, String>> schedule = new HashMap<>();
-        HashMap<String, String> lessons= new HashMap<>();
-        lessons.put("Физика","Кошкина");lessons.put("Математика","Плетенёав");lessons.put("Гуси","Гусева");lessons.put("Стрельба","Сергеич");
-        schedule.put("7",lessons);
-
-        c.setIndex(0);
-
-        c.setSchedule(schedule);
-        c.addLearner(l1);c.addLearner(l2);
-
-        HashMap<String, HashMap<String, HashMap<String, String>>> journal = new HashMap<>();
-        HashMap<String, String> learners = new HashMap<>();
-        learners.put("Воскребенцев", "5");learners.put("Лесков", "Н");
-        HashMap<String, HashMap<String, String>> lesson_teacher = new HashMap<>();
-        lesson_teacher.put("Физика_Кошкина", learners);
-        lesson_teacher.put("Математика_плетенёва", learners);
-        journal.put("07-02-2021", lesson_teacher);
-        journal.put("07-03-2021", lesson_teacher);
-        c.setJournal(journal);
-        System.out.println(journal);
-        c.convertStringToJournal(journal.toString());
-
-        school.addClass(c);
-*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -494,7 +459,7 @@ public class MainActivity extends AppCompatActivity implements AddingPostman, Do
     // принимает значения из Активности Редактирования, заного вызывает её
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         // взятие значение из возвращенного Intent data
-        if (data==null) System.out.println("NUll MF");
+        if (data==null) System.out.println("NUll DATA");
         System.out.println("Код результата: "+resultCode);
         String selected_learner="";
         String selected_teacher=data.getStringExtra("selected_teacher");

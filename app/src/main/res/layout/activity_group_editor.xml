@@ -7,184 +7,197 @@
     android:orientation="vertical"
     tools:context=".GroupEditorActivity">
 
-    <LinearLayout
-        android:id="@+id/container_schedule"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="7"
-        android:fadeScrollbars="false"
-        android:isScrollContainer="false"
-        android:orientation="vertical"
-        android:padding="10dp"
-        android:scrollbars="vertical">
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/text_schedule_instruction" />
+        android:layout_height="match_parent"
+        android:layout_weight="7">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/container_add_learner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/textView8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_choose_dayOfWeek" />
+                    android:text="@string/label_add_learner" />
 
                 <Spinner
-                    android:id="@+id/spinner_number_day"
+                    android:id="@+id/spinner_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/button_accept_add"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/spinner_week_days" />
+                    android:text="@string/button_accept_adding" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#151414" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:id="@+id/container_delete_learner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/textView9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/text_choose_number_lessons" />
+                    android:text="@string/label_delete_learner" />
 
                 <Spinner
-                    android:id="@+id/spinner_number_lessons"
+                    android:id="@+id/spinner_delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/button_accept_delete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/spinner_number_lessons" />
+                    android:text="@string/button_accept_deleting" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#151414" />
+
+            <LinearLayout
+                android:id="@+id/container_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_teacher" />
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#151414" />
+
+            <LinearLayout
+                android:id="@+id/container_schedule"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:fadeScrollbars="false"
+                android:isScrollContainer="false"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:scrollbars="vertical">
+
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_schedule_instruction" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_choose_dayOfWeek" />
+
+                        <Spinner
+                            android:id="@+id/spinner_number_day"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/spinner_week_days" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_choose_number_lessons" />
+
+                        <Spinner
+                            android:id="@+id/spinner_number_lessons"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/spinner_number_lessons" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/button_create_schedule_form"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:text="@string/button_create_form" />
+
+                <TableLayout
+                    android:id="@+id/table_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp" />
+
+                <Button
+                    android:id="@+id/button_edit_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="@string/button_edit_schedule" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#151414" />
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/button_create_schedule_form"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:text="@string/button_create_form" />
-
-        <TableLayout
-            android:id="@+id/table_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp" />
-
-        <Button
-            android:id="@+id/button_edit_schedule"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/button_edit_schedule" />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#151414" />
-
-    <LinearLayout
-        android:id="@+id/container_add_learner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/label_add_learner" />
-
-        <Spinner
-            android:id="@+id/spinner_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/button_accept_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_accept_adding" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#151414" />
-
-    <LinearLayout
-        android:id="@+id/container_delete_learner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/label_delete_learner" />
-
-        <Spinner
-            android:id="@+id/spinner_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <Button
-            android:id="@+id/button_accept_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/button_accept_deleting" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#151414" />
-
-    <LinearLayout
-        android:id="@+id/container_teacher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="5"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/label_teacher" />
-
-        <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#151414" />
+    </ScrollView>
 
     <Button
         android:id="@+id/button_exit"

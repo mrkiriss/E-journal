@@ -154,7 +154,7 @@ public class JournalFragment extends Fragment {
                 HashMap<String, String> lessons_teachers = schedule.get(selected_dayofweek);
 
                 // выход, если нет доступных уроков
-                if (lessons_teachers == null){
+                if (lessons_teachers.size()==0){
                     Toast.makeText(getContext(), "Ошбика. У класса нет уроков в выбранный день", Toast.LENGTH_SHORT).show();
                     return;
                 }

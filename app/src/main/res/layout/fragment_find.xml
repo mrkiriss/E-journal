@@ -6,38 +6,50 @@
     android:orientation="vertical"
     tools:context=".fragments.find" >
 
-    <TextView
-        android:id="@+id/textView20"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/text_find" />
+        android:layout_height="match_parent">
 
-    <Spinner
-        android:id="@+id/spinner_parameter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/spinner_parameter"
-        android:padding="5dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/textedit_find"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/hint_find"
-        android:inputType="textPersonName" />
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/text_find" />
 
-    <Button
-        android:id="@+id/button_find_person"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/button_find" />
+            <Spinner
+                android:id="@+id/spinner_parameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/spinner_parameter"
+                android:padding="5dp" />
 
-    <TableLayout
-        android:id="@+id/table_found"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" />
+            <EditText
+                android:id="@+id/textedit_find"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/hint_find"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/button_find_person"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/button_find" />
+
+            <TableLayout
+                android:id="@+id/table_found"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
